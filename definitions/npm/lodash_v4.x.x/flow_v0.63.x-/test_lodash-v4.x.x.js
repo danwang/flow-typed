@@ -309,23 +309,28 @@ zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
  * _.isString
  */
 
-var boolTrue: true;
-var boolFalse: false;
-
-boolTrue = isString("foo");
-boolFalse = isString([""]);
-boolFalse = isString({});
-boolFalse = isString(5);
-boolFalse = isString(function(f) {
-  return f;
-});
-boolFalse = isString();
-boolFalse = isString(true);
-
-// $ExpectError
-boolFalse = isString("");
-// $ExpectError
-boolTrue = isString(undefined);
+{
+  const x = '';
+  !isString(x) && (x: empty);
+}
+{
+  const x = {};
+  isString(x) && (x: empty);
+}
+{
+  const x = 5;
+  isString(x) && (x: empty);
+}
+{
+  const x = () => {};
+  isString(x) && (x: empty);
+}
+{
+  const x: mixed = 'foo';
+  isString(x) && (x: string);
+  // $ExpectError
+  !isString(x) && (x: string);
+}
 
 /**
  * _.find

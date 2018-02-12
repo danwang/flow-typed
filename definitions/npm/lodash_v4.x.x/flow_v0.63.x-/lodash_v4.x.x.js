@@ -207,6 +207,8 @@ declare module "lodash" {
     | ((item: T, key: string, object: O) => U)
     | propertyIterateeShorthand;
 
+  declare function _isString(value: mixed): boolean %checks(typeof value === 'string');
+
   declare class Lodash {
     // Array
     chunk<T>(array?: ?Array<T>, size?: ?number): Array<Array<T>>;
@@ -860,10 +862,7 @@ declare module "lodash" {
     isSafeInteger(value: any): false;
     isSet(value: Set<any>): true;
     isSet(value: any): false;
-    isString(value: string): true;
-    isString(
-      value: number | boolean | Function | void | null | Object | Array<any>
-    ): false;
+    isString: typeof _isString;
     isSymbol(value: Symbol): true;
     isSymbol(value: any): false;
     isTypedArray(value: $TypedArray): true;
@@ -2489,10 +2488,7 @@ declare module "lodash/fp" {
     isRegExp(value: any): boolean;
     isSafeInteger(value: any): boolean;
     isSet(value: any): boolean;
-    isString(value: string): true;
-    isString(
-      value: number | boolean | Function | void | null | Object | Array<any>
-    ): false;
+    isString: typeof _isString;
     isSymbol(value: any): boolean;
     isTypedArray(value: any): boolean;
     isUndefined(value: any): boolean;
